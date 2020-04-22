@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/bokubookstore?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    driver-class-name: com.mysql.jdbc.Driver
+  devtools:
+    restart:
+      #需要实时更新的目录
+      additional-paths: src/main
+      # 热部署开关，false即不启用热部署
+      enabled: true
+  servlet:
+    multipart:
+      #适用SpringBoot2.0后的版本
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+
+server:
+  port: 8989
+  tomcat:
+    maxHttpHeaderSize: 204800000
+    maxHttpPostSize: 204800000
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /
+
+
+# 自定义文件上传路径
+# Linux
+# Windows 10
+#  web.upload-path=E:/image
