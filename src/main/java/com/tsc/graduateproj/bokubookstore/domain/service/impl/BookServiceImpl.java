@@ -127,6 +127,7 @@ public class BookServiceImpl implements IBookService {
         String mainPic="";
         if(!ListUtils.isEmpty(pictureDOS)) mainPic=pictureDOS.get(0).getBookPicture();
         return new SettleAccountVO(directBuyBookDTO.getCount(),mainPic,bookDO,addressVO);
+
     }
 
     @Override
