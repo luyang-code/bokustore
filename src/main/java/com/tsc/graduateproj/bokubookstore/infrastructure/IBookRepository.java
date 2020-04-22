@@ -45,6 +45,7 @@ public interface IBookRepository extends JpaRepository<BookDO,Integer>, JpaSpeci
     @Query("update BookDO b set b.isdelete=true where b.bookId=?1")
     void deleteByBookId(String bookId);
 
+
     //根据书名查询
     @Query("select b from BookDO b where b.bookName like %?1% and b.isdelete=false ")
     List<BookDO> findBookByName(String bookName);
