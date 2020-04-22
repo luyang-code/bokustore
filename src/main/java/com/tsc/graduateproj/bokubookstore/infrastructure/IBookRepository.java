@@ -49,4 +49,5 @@ public interface IBookRepository extends JpaRepository<BookDO,Integer>, JpaSpeci
     @Query("select b from BookDO b where b.bookName like %?1% and b.isdelete=false ")
     List<BookDO> findBookByName(String bookName);
 
+
 }
