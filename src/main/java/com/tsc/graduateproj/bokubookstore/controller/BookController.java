@@ -85,6 +85,7 @@ public class BookController {
         return bookService.directBuyBook(directBuyBookDTO);
     }
 
+
     @ApiOperation("上传轮播图")
     @PostMapping("/uploadRotationPic")
     public Boolean uploadRotationPic(@RequestParam("picture") MultipartFile picture) throws IOException {
