@@ -2,16 +2,23 @@ package com.tsc.graduateproj.bokubookstore.domain.service.impl;
 
 import com.tsc.graduateproj.bokubookstore.command.dto.UserLoginDTO;
 import com.tsc.graduateproj.bokubookstore.command.dto.UserRegistDTO;
+import com.tsc.graduateproj.bokubookstore.command.dto.UserSaveDTO;
 import com.tsc.graduateproj.bokubookstore.command.vo.UserVO;
+import com.tsc.graduateproj.bokubookstore.command.vo.UserWithCountVO;
 import com.tsc.graduateproj.bokubookstore.domain.model.UserDO;
 import com.tsc.graduateproj.bokubookstore.domain.service.IUserService;
 import com.tsc.graduateproj.bokubookstore.infrastructure.IUserRepository;
 import com.tsc.graduateproj.bokubookstore.enums.ExceptionEnum;
 import com.tsc.graduateproj.bokubookstore.util.ExceptionUtil;
+import com.tsc.graduateproj.bokubookstore.util.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -43,5 +50,31 @@ public class UserServiceImpl implements IUserService {
         }
         userRepository.save(new UserDO(userRegistDTO,id));
         return true;
+    }
+
+    @Override
+    public void saveUserInfo(UserSaveDTO dto) {
+        UserDO userDO = userRepository.findByUserId(dto.getUserId());
+        userDO.setUserName(dto.getUserName());
+        userDO.setUserPassword(dto.getUserPassword());
+        if("0".equals(dto.getUserSex())){
+            userDO.setUserSex("男");
+        }else {
+            userDO.setUserSex("女");
+        }
+        userRepository.save(userDO);
+    }
+
+    @Override
+    public UserWithCountVO findUserList(Integer page, Integer size) {
+        List<UserDO> allUser = userRepository.findAllUser();
+        List<UserVO> userVOS = allUser.stream().map(user -> new UserVO(user)).collect(Collectors.toList());
+        return new UserWithCountVO(userVOS.size(),ListUtils.page(userVOS, page, size));
+    }
+
+    @Transactional
+    @Override
+    public void deleteUser(String userId) {
+        userRepository.deleteByUserId(userId);
     }
 }

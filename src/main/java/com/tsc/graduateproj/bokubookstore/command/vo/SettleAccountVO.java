@@ -46,6 +46,9 @@ public class SettleAccountVO {
     @ApiModelProperty("新价格")
     private BigDecimal bookNewPrice;
 
+    @ApiModelProperty("商家id")
+    private String adminId;
+
     public SettleAccountVO(CartDO cartDO, String mainPic, BookDO bookDO, AddressVO addressVO){
         this.bookId=bookDO.getBookId();
         this.mainBookPicture=mainPic;
@@ -57,6 +60,7 @@ public class SettleAccountVO {
         this.bookCount=cartDO.getBookCount();
         this.bookOldPrice=bookDO.getBookOldPrice();
         this.bookNewPrice=bookDO.getBookNewPrice();
+        this.adminId=bookDO.getAdminId();
     }
 
     //直接购买
@@ -71,6 +75,7 @@ public class SettleAccountVO {
         this.bookCount=bookCount;
         this.bookOldPrice=bookDO.getBookOldPrice();
         this.bookNewPrice=bookDO.getBookNewPrice();
+        this.adminId=bookDO.getAdminId();
     }
 
 }

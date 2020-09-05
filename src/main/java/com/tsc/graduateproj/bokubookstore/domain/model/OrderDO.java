@@ -71,6 +71,10 @@ public class OrderDO {
     @ApiModelProperty("收货人")
     private String receiver;
 
+    @Column(name = "admin_id")
+    @ApiModelProperty("商家id")
+    private String adminId;
+
     /*
       以下固定五项字段
     */
@@ -89,19 +93,20 @@ public class OrderDO {
     //是否删除
     private Boolean isdelete;
 
-    public OrderDO(String userId, String addressId,SettleAccountDTO settleAccountDTO){
-        this.orderNumber=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+(int)(Math.random()*9000+1000);
-        this.customId=userId;
-        this.addressId=addressId;
-        this.bookId=settleAccountDTO.getBookId();
-        this.bookCount=settleAccountDTO.getBookCount();
-        this.orderPrice=new BigDecimal(settleAccountDTO.getOrderPrice());
-        this.orderState=1;
-        this.orderTime=new Date();
-        this.address=settleAccountDTO.getAddress();
-        this.phone=settleAccountDTO.getPhone();
-        this.receiver=settleAccountDTO.getReceiver();
-        this.isdelete=false;
+    public OrderDO(String userId, String addressId, SettleAccountDTO settleAccountDTO) {
+        this.orderNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + (int) (Math.random() * 9000 + 1000);
+        this.customId = userId;
+        this.addressId = addressId;
+        this.bookId = settleAccountDTO.getBookId();
+        this.bookCount = settleAccountDTO.getBookCount();
+        this.orderPrice = new BigDecimal(settleAccountDTO.getOrderPrice());
+        this.orderState = 0;
+        this.orderTime = new Date();
+        this.address = settleAccountDTO.getAddress();
+        this.phone = settleAccountDTO.getPhone();
+        this.receiver = settleAccountDTO.getReceiver();
+        this.isdelete = false;
+        this.adminId = settleAccountDTO.getAdminId();
     }
 
 }

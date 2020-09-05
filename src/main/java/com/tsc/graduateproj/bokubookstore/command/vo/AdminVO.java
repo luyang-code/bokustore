@@ -26,12 +26,16 @@ public class AdminVO {
     @ApiModelProperty("性别")
     private String adminSex;
 
+    @ApiModelProperty("是否是管理员")
+    private Boolean isSuperAdmin;
+
     public AdminVO(AdminDO adminDO){
         this.adminId=adminDO.getAdminId();
         this.adminName=adminDO.getAdminName();
         this.adminPassword=adminDO.getAdminPassword();
         this.adminPhone=adminDO.getAdminPhone();
         this.adminSex=adminDO.getAdminSex();
+        this.isSuperAdmin=adminDO.getIsSuperAdmin();
 
     }
 

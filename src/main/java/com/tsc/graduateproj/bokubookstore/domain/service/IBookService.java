@@ -1,6 +1,8 @@
 package com.tsc.graduateproj.bokubookstore.domain.service;
 
+import com.tsc.graduateproj.bokubookstore.command.dto.BackBookParamDTO;
 import com.tsc.graduateproj.bokubookstore.command.dto.BookDTO;
+import com.tsc.graduateproj.bokubookstore.command.dto.BookParamDTO;
 import com.tsc.graduateproj.bokubookstore.command.dto.DirectBuyBookDTO;
 import com.tsc.graduateproj.bokubookstore.command.vo.*;
 
@@ -40,5 +42,16 @@ public interface IBookService {
 
     //上传轮播图
     Boolean addRotationPic(String rotationPic);
+
+    //获取销量前十
+    List<BookVO> getTopTenBooks();
+
+    //首页搜索图书
+    BookWithCountVO searchBooks(Integer page, Integer size, BookParamDTO dto);
+
+    //商家后台搜索图书
+    BookWithCountVO backSearchBooks(Integer page, Integer size, BackBookParamDTO dto);
+
+    void modifyGoodsState(String bookId,Boolean state);
 
 }

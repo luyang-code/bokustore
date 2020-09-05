@@ -49,6 +49,12 @@ public class BookDetailVO {
     @ApiModelProperty("图书详情介绍")
     private String bookDetail;
 
+    @ApiModelProperty("上架状态")
+    private Boolean putState;
+
+    @ApiModelProperty("库存数量")
+    private Integer stockCount;
+
     public BookDetailVO(BookDO bookDO, List<PictureDTO> pictures){
         this.bookId=bookDO.getBookId();
         this.bookName=bookDO.getBookName();
@@ -61,6 +67,8 @@ public class BookDetailVO {
         this.bookOldPrice=bookDO.getBookOldPrice();
         this.bookNewPrice=bookDO.getBookNewPrice();
         this.bookDetail=bookDO.getBookDetail();
+        this.putState=bookDO.getPutState();
+        this.stockCount=bookDO.getStockCount();
     }
 
 }

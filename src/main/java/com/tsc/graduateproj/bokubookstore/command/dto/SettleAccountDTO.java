@@ -26,4 +26,7 @@ public class SettleAccountDTO {
     @ApiModelProperty("收货人")
     private String receiver;
 
+    @ApiModelProperty("商家id")
+    private String adminId;
+
 }

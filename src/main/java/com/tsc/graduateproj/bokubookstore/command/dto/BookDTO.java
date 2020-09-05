@@ -44,4 +44,7 @@ public class BookDTO {
     @ApiModelProperty("图片集合")
     private List<PictureDTO> bookPictures;
 
+    @ApiModelProperty("库存数")
+    private Integer stockCount;
+
 }

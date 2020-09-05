@@ -32,4 +32,10 @@ public class DictionaryTableController {
         return dictionaryTableService.bookCategoeyDictionary();
     }
 
+    @ApiOperation(value = "出版社字典表")
+    @GetMapping("/publisher")
+    public List<DictionaryModel> getPublisherDictionary(){
+        return dictionaryTableService.publisherDictionary();
+    }
+
 }

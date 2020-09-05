@@ -68,6 +68,14 @@ public class BookDO {
     @ApiModelProperty("商家id")
     private String adminId;
 
+    @Column(name = "stock_count")
+    @ApiModelProperty("库存数量")
+    private Integer stockCount;
+
+    @Column(name = "put_state")
+    @ApiModelProperty("上架状态")
+    private Boolean putState;
+
     /*
       以下固定五项字段
     */
@@ -86,18 +94,21 @@ public class BookDO {
     //是否删除
     private Boolean isdelete;
 
-    public BookDO(BookDTO bookDTO,Integer footId){
-        this.adminId=bookDTO.getAdminId();
-        this.bookId="b"+footId;
-        this.bookName=bookDTO.getBookName();
-        this.bookAuthor=bookDTO.getBookAuthor();
-        this.bookIsbn=bookDTO.getBookIsbn();
-        this.bookCategory=bookDTO.getBookCategory();
-        this.bookPublish=bookDTO.getBookPublish();
-        this.bookPublishTime=bookDTO.getBookPublishTime();
-        this.bookOldPrice=new BigDecimal(bookDTO.getBookOldPrice());
-        this.bookNewPrice=new BigDecimal(bookDTO.getBookNewPrice());
-        this.bookDetail=bookDTO.getBookDetail();
-        this.isdelete=false;
+    public BookDO(BookDTO bookDTO, Integer footId) {
+        this.adminId = bookDTO.getAdminId();
+        this.bookId = "b" + footId;
+        this.bookName = bookDTO.getBookName();
+        this.bookAuthor = bookDTO.getBookAuthor();
+        this.bookIsbn = bookDTO.getBookIsbn();
+        this.bookCategory = bookDTO.getBookCategory();
+        this.bookPublish = bookDTO.getBookPublish();
+        this.bookPublishTime = bookDTO.getBookPublishTime();
+        this.bookOldPrice = new BigDecimal(bookDTO.getBookOldPrice());
+        this.bookNewPrice = new BigDecimal(bookDTO.getBookNewPrice());
+        this.bookDetail = bookDTO.getBookDetail();
+        this.stockCount = bookDTO.getStockCount();
+        this.isdelete = false;
+        this.putState = true;
+        this.modifytime = new Date();
     }
 }

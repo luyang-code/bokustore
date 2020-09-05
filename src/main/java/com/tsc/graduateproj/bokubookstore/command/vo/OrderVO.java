@@ -53,7 +53,7 @@ public class OrderVO {
     public OrderVO(OrderDO orderDO, UserDO userDO, BookDO bookDO,String mainPic){
         this.bookId=bookDO.getBookId();
         this.orderNumber=orderDO.getOrderNumber();
-        this.customName=userDO.getUserName();
+        this.customName=orderDO.getReceiver();
         this.address= orderDO.getAddress();
         this.bookName=bookDO.getBookName();
         this.bookAuthor=bookDO.getBookAuthor();

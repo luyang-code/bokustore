@@ -43,6 +43,10 @@ public class AdminDO {
     @ApiModelProperty("性别")
     private String adminSex;
 
+    @Column(name = "is_super_admin")
+    @ApiModelProperty("是否是管理员")
+    private Boolean isSuperAdmin;
+
     /*
       以下固定五项字段
     */
@@ -70,6 +74,7 @@ public class AdminDO {
         this.adminPhone=adminRegistDTO.getAdminPhone();
         this.adminSex=adminRegistDTO.getAdminSex().equals(man)?"男":"女";
         this.isdelete=false;
+        this.isSuperAdmin=adminRegistDTO.getIsSuperAdmin();
     }
 
 }

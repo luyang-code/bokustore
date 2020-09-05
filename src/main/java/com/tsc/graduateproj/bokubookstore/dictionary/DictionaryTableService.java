@@ -1,6 +1,7 @@
 package com.tsc.graduateproj.bokubookstore.dictionary;
 
 import com.tsc.graduateproj.bokubookstore.dictionary.enums.BookCategoryEnum;
+import com.tsc.graduateproj.bokubookstore.dictionary.enums.PublisherEnum;
 import com.tsc.graduateproj.bokubookstore.dictionary.enums.SexEnum;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,14 @@ public class DictionaryTableService {
      */
     public List<DictionaryModel> bookCategoeyDictionary() {
         return BookCategoryEnum.getDictionaryModels();
+    }
+
+    /**
+     * 出版社字典表
+     * @return
+     */
+    public List<DictionaryModel> publisherDictionary() {
+        return PublisherEnum.getDictionaryModels();
     }
 
 }

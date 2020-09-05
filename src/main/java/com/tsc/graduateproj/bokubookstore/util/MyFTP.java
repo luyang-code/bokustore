@@ -9,7 +9,7 @@ import java.net.SocketException;
 import java.util.UUID;
 
 /**
- * 服务器上传文件
+ * 服务器上传文件//这是我新加的
  */
 public class MyFTP {
     //阿里云服务器ip地址

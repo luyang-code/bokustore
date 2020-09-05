@@ -4,7 +4,10 @@ import com.tsc.graduateproj.bokubookstore.domain.model.UserDO;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface IUserRepository extends JpaRepository<UserDO,Integer>, JpaSpecificationExecutor<UserDO> {
 
@@ -22,5 +25,12 @@ public interface IUserRepository extends JpaRepository<UserDO,Integer>, JpaSpeci
 
     @Query("select count(u) from UserDO u where u.isdelete=false ")
     Integer queryNum();
+
+    @Query("select u from UserDO u where u.isdelete=false ")
+    List<UserDO> findAllUser();
+
+    @Modifying
+    @Query("update UserDO u set u.isdelete=true where u.userId=?1")
+    void deleteByUserId(String userId);
 
 }

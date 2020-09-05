@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import java.math.BigDecimal;
 
 @Getter
@@ -46,6 +47,12 @@ public class BookVO {
     @ApiModelProperty("图书详情介绍")
     private String bookDetail;
 
+    @ApiModelProperty("上架状态")
+    private Boolean putState;
+
+    @ApiModelProperty("库存数量")
+    private Integer stockCount;
+
     public BookVO(BookDO bookDO,String mainPic){
         this.bookId=bookDO.getBookId();
         this.bookName=bookDO.getBookName();
@@ -58,6 +65,8 @@ public class BookVO {
         this.bookOldPrice=bookDO.getBookOldPrice().toPlainString();
         this.bookNewPrice=bookDO.getBookNewPrice().toPlainString();
         this.bookDetail=bookDO.getBookDetail();
+        this.putState=bookDO.getPutState();
+        this.stockCount=bookDO.getStockCount();
     }
 
 }

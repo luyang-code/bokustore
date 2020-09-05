@@ -8,16 +8,20 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface IBookRepository extends JpaRepository<BookDO,Integer>, JpaSpecificationExecutor<BookDO> {
 
     //查询所有图书
-    @Query("select b from BookDO b where b.isdelete=false ")
+    @Query("select b from BookDO b where b.putState = true and b.isdelete=false ")
     List<BookDO> findAllBooks();
 
+    @Query("select b from BookDO b where b.adminId=?1 and b.isdelete=false ")
+    List<BookDO> findAllBooksAndAdminId(String adminId);
+
     //根据图书类别查询图书
-    @Query("select b from BookDO b where b.bookCategory=?1 and b.isdelete=false ")
+    @Query("select b from BookDO b where b.bookCategory=?1 and b.putState = true and b.isdelete=false ")
     List<BookDO> findByBookCategory(Integer category);
 
     //首页轮播图每种获取两个
@@ -47,8 +51,31 @@ public interface IBookRepository extends JpaRepository<BookDO,Integer>, JpaSpeci
 
 
     //根据书名查询
-    @Query("select b from BookDO b where b.bookName like %?1% and b.isdelete=false ")
+    @Query("select b from BookDO b where b.bookName like %?1% and b.putState=true and b.isdelete=false ")
     List<BookDO> findBookByName(String bookName);
 
+    //根据作者名查询
+    @Query("select b from BookDO b where b.bookAuthor like %?1% and b.putState=true and b.isdelete=false ")
+    List<BookDO> findBookAuthor(String bookAuthor);
 
+    @Query("select b from BookDO b where b.bookAuthor like %?1% and b.adminId = ?2 and b.isdelete=false ")
+    List<BookDO> findBookAuthorAndAdminId(String bookAuthor,String adminId);
+
+    @Query("select b from BookDO b where b.bookPublishTime>= ?1 and b.bookPublishTime<=?2 and b.putState=true and b.isdelete=false ")
+    List<BookDO> findBookByPublisTimes(String start,String end);
+
+    @Query("select b from BookDO b where b.bookPublishTime>= ?1 and b.bookPublishTime<=?2 and b.adminId=?3 and b.isdelete=false ")
+    List<BookDO> findBookByPublisTimesAndAdminId(String start,String end,String adminId);
+
+    @Query("select b from BookDO b where b.bookNewPrice>= ?1 and b.bookNewPrice<=?2 and b.putState=true and b.isdelete=false ")
+    List<BookDO> findBookByPrices(BigDecimal left,BigDecimal right);
+
+    @Query("select b from BookDO b where b.bookNewPrice>= ?1 and b.putState=true  and b.isdelete=false ")
+    List<BookDO> findBookByPrices1(BigDecimal left);
+
+    @Query("select b from BookDO b where b.bookNewPrice>= ?1 and b.bookNewPrice<=?2 and b.adminId=?3 and b.isdelete=false ")
+    List<BookDO> findBookByPricesAndAdminId(BigDecimal left,BigDecimal right,String adminId);
+
+    @Query("select b from BookDO b where b.bookNewPrice >= ?1 and b.adminId=?2 and b.isdelete=false ")
+    List<BookDO> findBookByPricesAndAdminId1(BigDecimal left,String adminId);
 }

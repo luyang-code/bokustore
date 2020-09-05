@@ -1,5 +1,6 @@
 package com.tsc.graduateproj.bokubookstore.controller;
 
+import com.tsc.graduateproj.bokubookstore.command.dto.OrderParamDTO;
 import com.tsc.graduateproj.bokubookstore.command.dto.SettleAccountParamDTO;
 import com.tsc.graduateproj.bokubookstore.command.dto.UserIdAndBookIdsDTO;
 import com.tsc.graduateproj.bokubookstore.command.vo.OrderVO;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -45,5 +47,24 @@ public class OrderController {
         return orderService.findBookToSettleAccountPage(userIdAndBookIdsDTO);
     }
 
+
+    @ApiOperation("商家后台订单管理列表")
+    @GetMapping("/backOrderListInfo/{page}/{size}/{adminId}")
+    public OrderWithCountVO backOrderListInfo(@PathVariable("page") Integer page,@PathVariable("size") Integer size,@PathVariable("adminId")String adminId){
+        return orderService.findBackOrderListInfo(page,size,adminId);
+    }
+
+    //可输入买家姓名或订单号或书名或作者
+    @ApiOperation("模糊搜索商家后台订单-可输入买家姓名或订单号或书名或作者,还可输入时间区间")
+    @PostMapping("/searchBackOrderList/{page}/{size}")
+    public OrderWithCountVO searchBackOrderList(@PathVariable("page") Integer page,@PathVariable("size") Integer size,@RequestBody @Valid OrderParamDTO dto){
+        return orderService.searchBackOrderList(page,size,dto);
+    }
+
+    @ApiOperation("修改订单发货状态")
+    @GetMapping("/modifyOrderState/{orderNumber}")
+    public void modifyOrderState(@PathVariable("orderNumber") String orderNumber){
+        orderService.modifyOrderState(orderNumber);
+    }
 
 }
