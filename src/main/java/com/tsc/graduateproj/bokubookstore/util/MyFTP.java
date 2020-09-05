@@ -42,7 +42,6 @@ public class MyFTP {
             int  reply = ftpClient.getReplyCode();
             //如果reply返回230就算成功了，如果返回530密码用户名错误或当前用户无权限
             System.out.println(reply);
-
             if (!FTPReply.isPositiveCompletion(reply)) {
                 ftpClient.disconnect();
                 return "";
